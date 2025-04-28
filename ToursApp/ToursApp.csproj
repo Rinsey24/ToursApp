@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\definitelyapicture.jpg" />
+      <Resource Include="Resources\definitelyapicture.jpg" />
+      <None Remove="Resources\calculator.ico" />
+      <Resource Include="Resources\calculator.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Entity.Framework.Core.Jwt.Token.Auth" Version="1.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="8.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    </ItemGroup>
+
+</Project>
