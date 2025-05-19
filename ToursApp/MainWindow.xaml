@@ -4,12 +4,49 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToursApp"
+        xmlns:models="clr-namespace:ToursApp.Models"
         mc:Ignorable="d"
         Icon="Resources/calculator.ico"
-        Title="Триваго?" 
-        Height="800" 
+        Title="Триваго?"
+        Height="800"
         Width="800"
         Closing="Window_Closing">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type models:Hotel}">
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="5"
+                    ToolTip="{Binding ImageTooltip}">
+                <StackPanel>
+                    <Image Source="{Binding CountryImage}" Height="150" Stretch="UniformToFill"/>
+                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="5,5,5,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="{Binding CountOfStars}" Foreground="Gold" FontWeight="Bold"/>
+                        <TextBlock Text="★" Foreground="Gold" FontWeight="Bold" Margin="2,0,5,0"/>
+                        <TextBlock Text="{Binding CountryCodeNavigation.Name}" FontStyle="Italic"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <!-- Стиль для кнопок навигации -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="175"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Georgia"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="HotPink" Offset="0"/>
+                        <GradientStop Color="LightSkyBlue" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.Background>Black</Grid.Background>
         <Grid.RowDefinitions>
@@ -17,25 +54,47 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Image Source="Resources/definitelyapicture.jpg" HorizontalAlignment="Left"/>
-        <TextBlock Text="Триваго?" 
-                   FontFamily="Georgia" 
-                   FontSize="30" 
-                   Foreground="DarkMagenta"
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
-        <Grid Background="DimGray" Panel.ZIndex="-2"/>
-        <Grid Grid.Row="2" Background="DimGray"/>
-        <Frame NavigationUIVisibility="Hidden" 
-               ContentRendered="MainFrame_OnContentRendered" 
-               Grid.Row="1" 
+
+        <!-- Верхняя панель -->
+        <Grid Grid.Row="0">
+            <Image Source="Resources/definitelyapicture.jpg" HorizontalAlignment="Left"/>
+            <TextBlock Text="Триваго?"
+                       FontFamily="Georgia"
+                       FontSize="30"
+                       Foreground="DarkMagenta"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+            
+            <!-- Кнопки навигации -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Content="Отели" 
+                        Name="BtnHotels"
+                        Style="{StaticResource NavButtonStyle}"
+                        Click="BtnHotels_Click"/>
+                <Button Content="Туры" 
+                        Name="BtnTours"
+                        Style="{StaticResource NavButtonStyle}"
+                        Click="BtnTours_Click"/>
+            </StackPanel>
+            
+            <Grid Background="DimGray" Panel.ZIndex="-2"/>
+        </Grid>
+
+        <!-- Основное содержимое -->
+        <Frame NavigationUIVisibility="Hidden"
+               ContentRendered="MainFrame_OnContentRendered"
+               Grid.Row="1"
                Name="MainFrame"/>
-        <Button Content="Назад" 
-                Name="BtnBack" 
-                Width="175" 
-                Height="30" 
-                HorizontalAlignment="Right" 
-                Margin="5" 
-                Click="BtnBack_OnClick"/>
+
+        <!-- Нижняя панель -->
+        <Grid Grid.Row="2" Background="DimGray">
+            <Button Content="Назад"
+                    Name="BtnBack"
+                    Width="175"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Margin="5"
+                    Click="BtnBack_OnClick"/>
+        </Grid>
     </Grid>
 </Window>

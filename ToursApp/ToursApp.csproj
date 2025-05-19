@@ -9,14 +9,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Resources\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Remove="Resources\definitelyapicture.jpg" />
       <Resource Include="Resources\definitelyapicture.jpg" />
       <None Remove="Resources\calculator.ico" />
       <Resource Include="Resources\calculator.ico" />
+      <None Remove="Resources\default_hotel.png" />
+      <Resource Include="Resources\default_hotel.png" />
+      <None Remove="Resources\Untitled.png" />
+      <Resource Include="Resources\Untitled.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -30,6 +30,10 @@
       </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\tours\" />
     </ItemGroup>
 
 </Project>

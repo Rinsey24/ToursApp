@@ -12,17 +12,25 @@ namespace ToursApp.Services
         {
             try
             {
-                hotel.Id = 0; 
                 _db.Hotels.Add(hotel);
                 _db.SaveChanges();
-                MessageBox.Show($"Отель добавлен! ID: {hotel.Id}");
+                
+                var imagePath = ImageService.GetImagePathForCountry(hotel.CountryCode);
+                if (imagePath != null)
+                {
+                    _db.HotelImages.Add(new HotelImage
+                    {
+                        HotelId = hotel.Id,
+                        ImageSource = imagePath
+                    });
+                    _db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка: {ex.Message}");
+                MessageBox.Show($"Ошибка при добавлении отеля: {ex.Message}");
             }
         }
-
         public static void UpdateHotel(Hotel hotel)
         {
             try
@@ -52,5 +60,24 @@ namespace ToursApp.Services
                 MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
+
+        public static void AddHotelImage(int hotelId, string imagePath)
+            {
+                try
+                {
+                    var image = new HotelImage
+                    {
+                        HotelId = hotelId,
+                        ImageSource = imagePath
+                    };
+        
+                    _db.HotelImages.Add(image);
+                    _db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при добавлении изображения: {ex.Message}");
+                }
+            }
+        }
     }
-}

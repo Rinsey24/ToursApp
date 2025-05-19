@@ -15,13 +15,17 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Название:" Grid.Row="0" Grid.Column="0" Margin="5"/>
+        <TextBlock Text="Название:" Grid.Row="0" Grid.Column="0" Margin="5"
+                   Foreground="White"/>
+        
         <TextBox x:Name="NameBox" Grid.Row="0" Grid.Column="1" Margin="5" MaxLength="100"/>
 
-        <TextBlock Text="Количество звезд:" Grid.Row="1" Grid.Column="0" Margin="5"/>
+        <TextBlock Text="Количество звезд:" Grid.Row="1" Grid.Column="0" Margin="5"
+                   Foreground="White"/>
         <TextBox x:Name="StarsBox" Grid.Row="1" Grid.Column="1" Margin="5"/>
 
-        <TextBlock Text="Страна:" Grid.Row="2" Grid.Column="0" Margin="5"/>
+        <TextBlock Text="Страна:" Grid.Row="2" Grid.Column="0" Margin="5"
+                   Foreground="White"/>
         <ComboBox x:Name="CountryCombo" Grid.Row="2" Grid.Column="1" Margin="5"
                   DisplayMemberPath="Name"/>
 

@@ -2,22 +2,38 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-namespace ToursApp.Models;
+using System.Windows.Media.Imaging;
+using ToursApp.Services;
 
-public partial class Hotel
+namespace ToursApp.Models
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
+    public partial class Hotel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
-    public string Name { get; set; } = null!;
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; } = null!;
 
-    public int CountOfStars { get; set; }
+        [Range(1, 5)]
+        public int CountOfStars { get; set; }
 
-    public string CountryCode { get; set; } = null!;
+        [Required]
+        [StringLength(3)]
+        public string CountryCode { get; set; } = null!;
 
-    public virtual Country CountryCodeNavigation { get; set; } = null!;
+        [ForeignKey("CountryCode")]
+        public virtual Country CountryCodeNavigation { get; set; } = null!;
 
-    public virtual ICollection<HotelComment> HotelComments { get; set; } = new List<HotelComment>();
+        public virtual ICollection<HotelComment> HotelComments { get; set; } = new List<HotelComment>();
+        public virtual ICollection<HotelImage> HotelImages { get; set; } = new List<HotelImage>();
 
-    public virtual ICollection<HotelImage> HotelImages { get; set; } = new List<HotelImage>();
+        [NotMapped]
+        public BitmapImage CountryImage => ImageService.GetCountryImage(CountryCode);
+
+        [NotMapped]
+        public string ImageTooltip => $"Отель {Name} в {CountryCodeNavigation?.Name} ({CountOfStars} звёзд)";
+    }
 }
